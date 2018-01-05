@@ -1,0 +1,14 @@
+[Unit]
+Description=Mesos DNS
+After=network.target
+Wants=network.target
+
+[Service]
+EnvironmentFile={{mesos_dns_home}}/environment
+ExecStart={{mesos_dns_home}}/mesos-dns-wrapper.sh
+Restart=always
+RestartSec=20
+LimitNOFILE=16384
+
+[Install]
+WantedBy=multi-user.target

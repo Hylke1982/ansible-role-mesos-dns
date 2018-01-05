@@ -1,0 +1,70 @@
+- name: "Create Mesos DNS group"
+  group:
+    name: "{{ mesos_dns_group }}"
+  become: true
+
+- name: "Create Mesos DNS user"
+  user:
+    name: "{{ mesos_dns_user }}"
+    comment: "Mesos"
+    group: "{{ mesos_dns_group }}"
+    home: "{{ mesos_dns_home }}"
+  become: true
+
+- name: "Download Mesos DNS"
+  get_url:
+    url: "{{ mesos_dns_link }}"
+    dest: "{{ mesos_dns_home }}/mesos-dns"
+    mode: 0740
+    owner: "{{ mesos_dns_user }}"
+    group: "{{ mesos_dns_group }}"
+
+- name: "Create empty environments file"
+  copy:
+    content: ""
+    dest: "{{mesos_dns_home}}/environment"
+    force: no
+    owner: "{{ mesos_dns_user }}"
+    group: "{{ mesos_dns_group }}"
+    mode: 0755
+  become: true
+
+- name: "update-mesos-slave-dns"
+  include: "update_mesos_slave_dns.yml"
+
+- name: "Install new Mesos DNS wrapper"
+  template:
+    src: mesos-dns-wrapper.sh.j2
+    dest: "{{mesos_dns_home}}/mesos-dns-wrapper.sh"
+    owner: "{{ mesos_dns_user }}"
+    group: "{{ mesos_dns_group }}"
+    mode: 0744
+  become: true
+
+- name: "Copy MESOS dns config file"
+  copy:
+    src: config.json
+    dest: "{{mesos_dns_home}}/config.json"
+    owner: "{{ mesos_dns_user }}"
+    group: "{{ mesos_dns_group }}"
+    mode: "u=rwx,g=x,o=x"
+  become: true
+
+- name: "Install new Mesos DNS service unit"
+  template:
+    src: mesos-dns.service.j2
+    dest: /lib/systemd/system/mesos-dns.service
+    owner: root
+    group: root
+    mode: 0555
+  become: true
+
+- name: "reload systemd"
+  systemd: daemon_reload=yes
+
+- name: "Ensure Mesos dns is stopped and disabled."
+  service:
+    name: mesos-dns
+    state: stopped
+    enabled: no
+  become: true

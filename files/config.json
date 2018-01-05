@@ -1,0 +1,10 @@
+{
+  "zk": "ZK",
+  "refreshSeconds": 30,
+  "ttl": 30,
+  "domain": "mesos",
+  "port": 53,
+  "resolvers": ["8.8.8.8"],
+  "timeout": 5,
+  "email": "root.mesos-dns.mesos"
+}

@@ -1,0 +1,12 @@
+- name: "Mesos update slave dns config"
+  template:
+    src: "update-slave-dns-config.sh.j2"
+    dest: "{{ mesos_dns_home }}/update-slave-dns-config.sh"
+    owner: "{{ mesos_user }}"
+    group: "{{ mesos_group }}"
+    mode: "u=rwx,g=rx,o=rx"
+  become: true
+
+- name: "Update slave DNS"
+  command: "{{ mesos_dns_home }}/update-slave-dns-config.sh"
+  become: true

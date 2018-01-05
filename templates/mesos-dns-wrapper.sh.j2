@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Replace ZK
+echo "Zookeeper: $ZK"
+jq -r --arg ZK $ZK '.zk = $ZK' /opt/mesos-dns/config.json | sponge /opt/mesos-dns/config.json
+
+
+# Start mesos DNS
+{{ mesos_dns_home }}/mesos-dns -config={{ mesos_dns_home }}/config.json
