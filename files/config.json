@@ -6,5 +6,6 @@
   "port": 53,
   "resolvers": ["8.8.8.8"],
   "timeout": 5,
-  "email": "root.mesos-dns.mesos"
+  "email": "root.mesos-dns.mesos",
+  "IPSources": ["host", "netinfo"]
 }
