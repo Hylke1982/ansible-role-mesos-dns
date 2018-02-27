@@ -1,7 +1,4 @@
 ---
-dependencies:
-- { role: mesos }
-
 galaxy_info:
   author: Hylke Stapersma
   description: Mesos DNS
