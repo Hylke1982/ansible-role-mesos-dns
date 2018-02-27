@@ -31,6 +31,7 @@
 
 - name: "update-mesos-slave-dns"
   include: "update_mesos_slave_dns.yml"
+  when: "( mesos_slave_update|default(mesos_slave_update) )"
 
 - name: "Install new Mesos DNS wrapper"
   template:

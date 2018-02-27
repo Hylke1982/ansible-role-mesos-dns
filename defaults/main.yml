@@ -3,3 +3,4 @@ mesos_dns_group: mesosdns
 mesos_dns_home: /opt/mesos-dns
 mesos_dns_version: 0.6.0
 mesos_dns_link: "https://github.com/mesosphere/mesos-dns/releases/download/v{{ mesos_dns_version }}/mesos-dns-v{{ mesos_dns_version }}-linux-amd64"
+mesos_slave_update: true
