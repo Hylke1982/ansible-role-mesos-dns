@@ -42,6 +42,15 @@
     mode: 0744
   become: true
 
+- name: "Install new Mesos DNS STOP wrapper"
+  template:
+    src: mesos-dns-stop-wrapper.sh.j2
+    dest: "{{mesos_dns_home}}/mesos-dns-stop-wrapper.sh"
+    owner: "{{ mesos_dns_user }}"
+    group: "{{ mesos_dns_group }}"
+    mode: 0744
+  become: true
+
 - name: "Copy MESOS dns config file"
   copy:
     src: config.json

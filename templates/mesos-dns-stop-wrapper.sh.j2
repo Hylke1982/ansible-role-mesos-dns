@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Update machine DNS
+sudo sed -i '1s/nameserver 127.0.0.1\n/^ /' /etc/resolv.conf

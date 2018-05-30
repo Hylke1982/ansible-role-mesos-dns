@@ -6,6 +6,7 @@ Wants=network.target
 [Service]
 EnvironmentFile={{mesos_dns_home}}/environment
 ExecStart={{mesos_dns_home}}/mesos-dns-wrapper.sh
+ExecStop={{mesos_dns_home}}/mesos-dns-stop-wrapper.sh
 Restart=always
 RestartSec=20
 LimitNOFILE=16384
