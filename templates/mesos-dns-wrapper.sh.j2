@@ -4,6 +4,8 @@
 echo "Zookeeper: $ZK"
 jq -r --arg ZK $ZK '.zk = $ZK' /opt/mesos-dns/config.json | sponge /opt/mesos-dns/config.json
 
+# Update machine DNS
+sudo sed -i '1s/^/nameserver 127.0.0.1\n /' /etc/resolv.conf
 
 # Start mesos DNS
 {{ mesos_dns_home }}/mesos-dns -config={{ mesos_dns_home }}/config.json
