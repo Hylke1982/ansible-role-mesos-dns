@@ -2,10 +2,10 @@
   "zk": "ZK",
   "refreshSeconds": 30,
   "ttl": 30,
-  "domain": "mesos",
+  "domain": "{{mesos_dns_domain_internal}}",
   "port": 53,
   "resolvers": ["8.8.8.8"],
   "timeout": 5,
-  "email": "root.mesos-dns.mesos",
+  "email": "root.mesos-dns.{{mesos_dns_domain_internal}}",
   "IPSources": ["host", "netinfo"]
 }

@@ -52,8 +52,8 @@
   become: true
 
 - name: "Copy MESOS dns config file"
-  copy:
-    src: config.json
+  template:
+    src: config.json.j2
     dest: "{{mesos_dns_home}}/config.json"
     owner: "{{ mesos_dns_user }}"
     group: "{{ mesos_dns_group }}"
